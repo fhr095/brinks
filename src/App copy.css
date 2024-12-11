@@ -1,0 +1,85 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  overflow: hidden; /* Impede scroll */
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 40px;
+}
+
+/* Área para o botão "Sim" */
+.buttons-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: none; /* Sem transições */
+}
+
+.yes-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  z-index: 1;
+}
+
+.no-button {
+  background-color: #dc3545; /* Vermelho */
+  color: white;
+  z-index: 2;
+  /* O no-button agora é posicionado dinamicamente via inline style no App.jsx */
+}
+
+.final-yes {
+  background-color: #28a745 !important; /* Verde */
+  animation: clickEffect 0.5s;
+}
+
+.final-no {
+  background-color: #dc3545 !important; /* Vermelho */
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Efeito de clique */
+@keyframes clickEffect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}
