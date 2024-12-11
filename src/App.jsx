@@ -82,64 +82,74 @@ function App() {
     const container = containerRef.current;
     const yesButton = yesButtonRef.current;
     const noButton = noButtonRef.current;
-
+  
     if (!container || !yesButton || !noButton) return;
-
+  
     const containerRect = container.getBoundingClientRect();
     const yesRect = yesButton.getBoundingClientRect();
     const noWidth = noButton.offsetWidth;
     const noHeight = noButton.offsetHeight;
-
-    const margin = 20;
-    const maxLeft = containerRect.width - noWidth - margin;
-    const maxTop = containerRect.height - noHeight - margin;
-
+  
+    // Margens dinâmicas baseadas no tamanho do botão
+    const marginWidth = noWidth * 1.5; // 150% da largura do botão
+    const marginHeight = noHeight * 1.5; // 150% da altura do botão
+  
+    const maxLeft = containerRect.width - noWidth - marginWidth;
+    const maxTop = containerRect.height - noHeight - marginHeight;
+  
+    const notificationHeight = 120; // Altura aproximada da notificação final
+  
     let newLeft, newTop;
     let overlap = true;
     let attemptsMove = 0;
-
+  
     while (overlap && attemptsMove < 200) {
-      newLeft = Math.floor(Math.random() * (maxLeft - margin)) + margin;
-      newTop = Math.floor(Math.random() * (maxTop - margin)) + margin;
-
+      newLeft = Math.random() * (maxLeft - marginWidth) + marginWidth;
+      newTop = Math.random() * (maxTop - marginHeight - notificationHeight) + marginHeight;
+  
       const yesOffsetTop = yesRect.top - containerRect.top;
       const yesOffsetLeft = yesRect.left - containerRect.left;
       const yesWidth = yesRect.width;
       const yesHeight = yesRect.height;
-
+  
       const noRect = {
         top: newTop,
         left: newLeft,
         right: newLeft + noWidth,
         bottom: newTop + noHeight,
       };
-
+  
       const yesAdjustedRect = {
         top: yesOffsetTop,
         left: yesOffsetLeft,
         right: yesOffsetLeft + yesWidth,
-        bottom: yesOffsetTop + yesHeight
+        bottom: yesOffsetTop + yesHeight,
       };
-
+  
+      // Verifica se o botão "Não" sobrepõe o "Sim" ou a área da notificação
       overlap = !(noRect.right < yesAdjustedRect.left ||
                   noRect.left > yesAdjustedRect.right ||
                   noRect.bottom < yesAdjustedRect.top ||
-                  noRect.top > yesAdjustedRect.bottom);
-
+                  noRect.top > yesAdjustedRect.bottom) ||
+                noRect.bottom > containerRect.height - notificationHeight;
+  
       attemptsMove++;
     }
-
-    // Se não encontrou posição, fallback
+  
+    // Fallback para margens padrão, caso não encontre posição válida
     if (overlap) {
-      newLeft = margin;
-      newTop = margin;
+      newLeft = marginWidth;
+      newTop = marginHeight;
     }
-
+  
     setPositions(prev => ({
       ...prev,
       no: { top: newTop, left: newLeft }
     }));
   };
+  
+  
+
 
   const showEncouragementMessage = () => {
     let newMessage = '';
