@@ -148,9 +148,10 @@ button:disabled {
 
 .final-message {
   position: absolute;
-  bottom: 20%; /* Reserva espaço no final da tela */
+  bottom: 20%;
   left: 10%;
   width: 80%;
+  margin: 0 auto;
   background-color: #28a745; /* Fundo verde claro */
   color: white;
   font-size: 1.5em; /* Aumenta o tamanho da fonte */
@@ -160,7 +161,6 @@ button:disabled {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   animation: fadeInSlide 1s ease-out forwards;
   opacity: 0; /* Inicialmente invisível */
-  z-index: 10; /* Certifica-se de que a notificação fique sobre outros elementos */
 }
 
 /* Animação de entrada suave */
