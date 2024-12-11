@@ -160,7 +160,7 @@ function App() {
   return (
     <div className="container" ref={containerRef}>
       {proposalAccepted && <Confetti width={width} height={height} />}
-      <h1>Quer se casar comigo?</h1>
+      <h1>Me dá o cu?</h1>
       <p className="subtext">Estou muito feliz em chegar até aqui. Escolha com carinho:</p>
       
       <button
@@ -193,7 +193,8 @@ function App() {
 
       {proposalAccepted && (
         <p className="final-message">
-          Um email contendo a solicitação de aceite foi enviado para o senhor Felipe Henrique. f******095@gmail.com
+          Um email contendo a solicitação de aceite foi enviado para o senhor Felipe Henrique. f******095@gmail.com.
+          Aguarde-o que ele entrará em contato!
         </p>
       )}
       {messages.length > 0 && (
